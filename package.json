@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/tomsdoo/electronade-endecoder/issues"
   },
-  "homepage": "https://github.com/tomsdoo/electronade-endecoder#readme"
+  "homepage": "https://github.com/tomsdoo/electronade-endecoder#readme",
+  "devDependencies": {
+    "electron": "^20.0.3"
+  }
 }
