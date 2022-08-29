@@ -9,7 +9,17 @@ const ipcRenderer: {
   invoke: (eventName: string) => Promise.resolve(eventName)
 };
 
+let handleStore: {
+  [key: string]: Function;
+};
+
 describe("preloadObject to handles", () => {
+  before(() => {
+    handleStore = Object.fromEntries(
+      handles.map(({ eventName, handler }) => [ eventName, handler ])
+    );
+  });
+
   it("electronade-endecoder:encode", async () => {
     const myEventName =await eval(preloadObject.endecoder.encode.toString())({
       plainText: "test",
@@ -17,11 +27,7 @@ describe("preloadObject to handles", () => {
       salt: "salt"
     });
 
-    assert(
-      handles.find(
-        ({ eventName }) => myEventName === eventName
-      )
-    );
+    assert(myEventName in handleStore);
   });
 
   it("electronade-endecoder:decode", async () => {
@@ -31,10 +37,6 @@ describe("preloadObject to handles", () => {
       salt: "salt"
     });
 
-    assert(
-      handles.find(
-        ({ eventName }) => myEventName === eventName
-      )
-    );
+    assert(myEventName in handleStore);
   });
 });
