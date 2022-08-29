@@ -10,7 +10,21 @@ const ipcRenderer: {
   invoke: (eventName: string, ...args: any[]) => Promise.resolve(undefined)
 };
 
+let mockedValue: string;
+let plainText: string;
+let encodedText: string;
+let password: string;
+let salt: string;
+
 describe("preloadObject", () => {
+  before(() => {
+    mockedValue = "mocked value";
+    plainText = "this is test text!!";
+    encodedText = "this is a test";
+    password = "password?/";
+    salt = "salt;:";
+  });
+
   it("preloadObject.endecoder exists", () => {
     assert(preloadObject.endecoder);
   });
@@ -21,18 +35,6 @@ describe("preloadObject", () => {
 
   it("preloadObject.endecoder.encode calling", async () => {
     const mocked = mock(ipcRenderer);
-    const [
-      mockedValue,
-      plainText,
-      password,
-      salt
-    ] = [
-      "mocked value",
-      "this is test text!!",
-      "password?/",
-      "salt;:"
-    ];
-
     mocked
       .expects("invoke")
       .once()
@@ -56,18 +58,6 @@ describe("preloadObject", () => {
 
   it("preloadObject.endecoder.decode calling", async () => {
     const mocked = mock(ipcRenderer);
-    const [
-      mockedValue,
-      encodedText,
-      password,
-      salt
-    ] = [
-      "mocked value",
-      "this is test text!!",
-      "password?/",
-      "salt;:"
-    ];
-
     mocked
       .expects("invoke")
       .once()
