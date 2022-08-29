@@ -3,22 +3,26 @@ import { strict as assert } from "assert";
 
 import { handles } from "../src/handles";
 
+let handleStore: {
+  [key: string]: Function;
+};
+
 describe("handles", () => {
+  before(() => {
+    handleStore = Object.fromEntries(
+      handles.map(({ eventName, handler }) => [ eventName, handler ])
+    );
+  });
+
   it("electronade-endecoder:encode eventName exists", () => {
     assert(
-      handles.find(
-        ({ eventName }) =>
-          eventName === "electronade-endecoder:encode"
-      )
+      "electronade-endecoder:encode" in handleStore
     );
   });
 
   it("electronade-endecoder:decode eventName exists", () => {
     assert(
-      handles.find(
-        ({ eventName }) =>
-          eventName === "electronade-endecoder:decode"
-      )
+      "electronade-endecoder:decode" in handleStore
     );
   });
 
