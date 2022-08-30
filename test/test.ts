@@ -1,10 +1,13 @@
 import { describe, it } from "mocha";
 import { strict as assert } from "assert";
 
+import { randomBytes } from "crypto";
+
 import { handles, preloadObject } from "../src/";
 
 let plainText: string;
 let encodedText: string;
+let plainBuffer: Buffer;
 let password: string;
 let salt: string;
 
@@ -22,6 +25,7 @@ describe("preloadObject to handles", () => {
   before(() => {
     plainText = "test";
     encodedText = "test encoded";
+    plainBuffer = randomBytes(256);
     password = "password";
     salt = "salt";
 
@@ -40,6 +44,13 @@ describe("preloadObject to handles", () => {
   it("electronade-endecoder:decode", async () => {
     const myEventName = await eval(preloadObject.endecoder.decode.toString())
       ({ encodedText, password, salt });
+
+    assert(myEventName in handleStore);
+  });
+
+  it("electronade-endecoder:encrypt", async () => {
+    const myEventName = await eval(preloadObject.endecoder.encrypt.toString())
+      ({ plainBuffer, password, salt });
 
     assert(myEventName in handleStore);
   });

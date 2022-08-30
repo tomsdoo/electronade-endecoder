@@ -1,6 +1,7 @@
 import { describe, it } from "mocha";
 import { strict as assert } from "assert";
 
+import { randomBytes } from "crypto";
 import { preloadObject } from "../src/";
 import { mock } from "sinon";
 
@@ -15,12 +16,14 @@ let plainText: string;
 let encodedText: string;
 let password: string;
 let salt: string;
+let plainBuffer: Buffer;
 
 describe("preloadObject", () => {
   before(() => {
     mockedValue = "mocked value";
     plainText = "this is test text!!";
     encodedText = "this is a test";
+    plainBuffer = randomBytes(256);
     password = "password?/";
     salt = "salt;:";
   });
@@ -73,5 +76,27 @@ describe("preloadObject", () => {
     );
     mocked.verify();
     mocked.restore();
+  });
+
+  it("preloadObject.endecoder.encrypt exists", () => {
+    assert(preloadObject.endecoder.encrypt);
+  });
+
+  it("preloadObject.endecoder.encrypt calling", async () => {
+    const mocked = mock(ipcRenderer);
+    mocked
+      .expects("invoke")
+      .once()
+      .withArgs(
+        "electronade-endecoder:encrypt",
+        { plainBuffer, password, salt }
+      )
+      .returns(Promise.resolve(mockedValue));
+
+    assert.equal(
+      await eval(preloadObject.endecoder.encrypt.toString())
+        ({ plainBuffer, password, salt }),
+      mockedValue
+    )
   });
 });
