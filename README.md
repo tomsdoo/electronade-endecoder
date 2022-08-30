@@ -32,6 +32,13 @@ electronade: {
         salt: string;
       }
     ) => Promise<string>;
+    decrypt: (
+      params: {
+        encodedText: string;
+        password: string;
+        salt: string;
+      }
+    ) => Promise<Buffer>;
   }
 }
 ```

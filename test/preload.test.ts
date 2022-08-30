@@ -97,6 +97,35 @@ describe("preloadObject", () => {
       await eval(preloadObject.endecoder.encrypt.toString())
         ({ plainBuffer, password, salt }),
       mockedValue
-    )
+    );
+
+    mocked.verify();
+    mocked.restore();
+  });
+
+  it("preloadObject.endecoder.decrypt exits", () => {
+    assert(preloadObject.endecoder.decrypt);
+  });
+
+  it("preloadObject.endecoder.decrypt calling", async () => {
+    const mocked = mock(ipcRenderer);
+    const mockedValue2 = randomBytes(256);
+    mocked
+      .expects("invoke")
+      .once()
+      .withArgs(
+        "electronade-endecoder:decrypt",
+        { encodedText, password, salt }
+      )
+      .returns(Promise.resolve(mockedValue2));
+
+    assert.equal(
+      await eval(preloadObject.endecoder.decrypt.toString())
+        ({ encodedText, password, salt }),
+      mockedValue2
+    );
+
+    mocked.verify();
+    mocked.restore();
   });
 });

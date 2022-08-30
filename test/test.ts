@@ -54,4 +54,11 @@ describe("preloadObject to handles", () => {
 
     assert(myEventName in handleStore);
   });
+
+  it("electronade-endecoder:decrypt", async () => {
+    const myEventName = await eval(preloadObject.endecoder.decrypt.toString())
+      ({ encodedText, password, salt });
+
+    assert(myEventName in handleStore);
+  });
 });
