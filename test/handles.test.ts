@@ -43,4 +43,9 @@ describe("handles", () => {
     )
   });
 
+  it("electronade-endecoder:encrypt eventName exists", () => {
+    assert(
+      "electronade-endecoder:encrypt" in handleStore
+    );
+  });
 });
