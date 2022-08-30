@@ -3,6 +3,11 @@ import { strict as assert } from "assert";
 
 import { handles, preloadObject } from "../src/";
 
+let plainText: string;
+let encodedText: string;
+let password: string;
+let salt: string;
+
 const ipcRenderer: {
   invoke: (eventName: string, ...args: any[]) => Promise<any>;
 } = {
@@ -15,27 +20,26 @@ let handleStore: {
 
 describe("preloadObject to handles", () => {
   before(() => {
+    plainText = "test";
+    encodedText = "test encoded";
+    password = "password";
+    salt = "salt";
+
     handleStore = Object.fromEntries(
       handles.map(({ eventName, handler }) => [ eventName, handler ])
     );
   });
 
   it("electronade-endecoder:encode", async () => {
-    const myEventName =await eval(preloadObject.endecoder.encode.toString())({
-      plainText: "test",
-      password: "password",
-      salt: "salt"
-    });
+    const myEventName =await eval(preloadObject.endecoder.encode.toString())
+      ({ plainText, password, salt });
 
     assert(myEventName in handleStore);
   });
 
   it("electronade-endecoder:decode", async () => {
-    const myEventName = await eval(preloadObject.endecoder.decode.toString())({
-      encodedText: "test",
-      password: "password",
-      salt: "salt"
-    });
+    const myEventName = await eval(preloadObject.endecoder.decode.toString())
+      ({ encodedText, password, salt });
 
     assert(myEventName in handleStore);
   });
