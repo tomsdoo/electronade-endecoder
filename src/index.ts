@@ -26,6 +26,18 @@ export const preloadObject = {
     }) => ipcRenderer.invoke(
       "electronade-endecoder:decode",
       { encodedText, password, salt }
+    ),
+    encrypt: ({
+      plainBuffer,
+      password,
+      salt
+    }: {
+      plainBuffer: Buffer;
+      password: string;
+      salt: string;
+    }) => ipcRenderer.invoke(
+      "electronade-endecoder:encrypt",
+      { plainBuffer, password, salt }
     )
   }
 };
