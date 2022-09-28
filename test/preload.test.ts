@@ -8,7 +8,7 @@ import { mock } from "sinon";
 const ipcRenderer: {
   invoke: (eventName: string, ...args: any[]) => Promise<any>;
 } = {
-  invoke: (eventName: string, ...args: any[]) => Promise.resolve(undefined)
+  invoke: (eventName: string, ...args: any[]) => Promise.resolve(undefined),
 };
 
 let mockedValue: string;
@@ -41,15 +41,16 @@ describe("preloadObject", () => {
     mocked
       .expects("invoke")
       .once()
-      .withArgs(
-        "electronade-endecoder:encode",
-        { plainText, password, salt }
-      )
+      .withArgs("electronade-endecoder:encode", { plainText, password, salt })
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
       mockedValue,
-      await eval(preloadObject.endecoder.encode.toString())({ plainText, password, salt })
+      await eval(preloadObject.endecoder.encode.toString())({
+        plainText,
+        password,
+        salt,
+      })
     );
     mocked.verify();
     mocked.restore();
@@ -64,15 +65,16 @@ describe("preloadObject", () => {
     mocked
       .expects("invoke")
       .once()
-      .withArgs(
-        "electronade-endecoder:decode",
-        { encodedText, password, salt }
-      )
+      .withArgs("electronade-endecoder:decode", { encodedText, password, salt })
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
       mockedValue,
-      await eval(preloadObject.endecoder.decode.toString())({ encodedText, password, salt })
+      await eval(preloadObject.endecoder.decode.toString())({
+        encodedText,
+        password,
+        salt,
+      })
     );
     mocked.verify();
     mocked.restore();
@@ -87,15 +89,19 @@ describe("preloadObject", () => {
     mocked
       .expects("invoke")
       .once()
-      .withArgs(
-        "electronade-endecoder:encrypt",
-        { plainBuffer, password, salt }
-      )
+      .withArgs("electronade-endecoder:encrypt", {
+        plainBuffer,
+        password,
+        salt,
+      })
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
-      await eval(preloadObject.endecoder.encrypt.toString())
-        ({ plainBuffer, password, salt }),
+      await eval(preloadObject.endecoder.encrypt.toString())({
+        plainBuffer,
+        password,
+        salt,
+      }),
       mockedValue
     );
 
@@ -113,15 +119,19 @@ describe("preloadObject", () => {
     mocked
       .expects("invoke")
       .once()
-      .withArgs(
-        "electronade-endecoder:decrypt",
-        { encodedText, password, salt }
-      )
+      .withArgs("electronade-endecoder:decrypt", {
+        encodedText,
+        password,
+        salt,
+      })
       .returns(Promise.resolve(mockedValue2));
 
     assert.equal(
-      await eval(preloadObject.endecoder.decrypt.toString())
-        ({ encodedText, password, salt }),
+      await eval(preloadObject.endecoder.decrypt.toString())({
+        encodedText,
+        password,
+        salt,
+      }),
       mockedValue2
     );
 

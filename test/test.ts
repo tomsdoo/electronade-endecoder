@@ -14,7 +14,7 @@ let salt: string;
 const ipcRenderer: {
   invoke: (eventName: string, ...args: any[]) => Promise<any>;
 } = {
-  invoke: (eventName: string) => Promise.resolve(eventName)
+  invoke: (eventName: string) => Promise.resolve(eventName),
 };
 
 let handleStore: {
@@ -30,34 +30,46 @@ describe("preloadObject to handles", () => {
     salt = "salt";
 
     handleStore = Object.fromEntries(
-      handles.map(({ eventName, handler }) => [ eventName, handler ])
+      handles.map(({ eventName, handler }) => [eventName, handler])
     );
   });
 
   it("electronade-endecoder:encode", async () => {
-    const myEventName =await eval(preloadObject.endecoder.encode.toString())
-      ({ plainText, password, salt });
+    const myEventName = await eval(preloadObject.endecoder.encode.toString())({
+      plainText,
+      password,
+      salt,
+    });
 
     assert(myEventName in handleStore);
   });
 
   it("electronade-endecoder:decode", async () => {
-    const myEventName = await eval(preloadObject.endecoder.decode.toString())
-      ({ encodedText, password, salt });
+    const myEventName = await eval(preloadObject.endecoder.decode.toString())({
+      encodedText,
+      password,
+      salt,
+    });
 
     assert(myEventName in handleStore);
   });
 
   it("electronade-endecoder:encrypt", async () => {
-    const myEventName = await eval(preloadObject.endecoder.encrypt.toString())
-      ({ plainBuffer, password, salt });
+    const myEventName = await eval(preloadObject.endecoder.encrypt.toString())({
+      plainBuffer,
+      password,
+      salt,
+    });
 
     assert(myEventName in handleStore);
   });
 
   it("electronade-endecoder:decrypt", async () => {
-    const myEventName = await eval(preloadObject.endecoder.decrypt.toString())
-      ({ encodedText, password, salt });
+    const myEventName = await eval(preloadObject.endecoder.decrypt.toString())({
+      encodedText,
+      password,
+      salt,
+    });
 
     assert(myEventName in handleStore);
   });

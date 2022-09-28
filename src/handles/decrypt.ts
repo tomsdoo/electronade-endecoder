@@ -6,13 +6,9 @@ type Params = {
   salt: string;
 };
 
-export function decrypt(
-  event: any,
-  { encodedText, password, salt }: Params
-) {
+export function decrypt(event: any, { encodedText, password, salt }: Params) {
   return SecretKey.activate({
     password,
-    salt
-  })
-    .decrypt(encodedText);
+    salt,
+  }).decrypt(encodedText);
 }

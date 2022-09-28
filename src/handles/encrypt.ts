@@ -6,13 +6,9 @@ type Params = {
   salt: string;
 };
 
-export function encrypt(
-  event: any,
-  { plainBuffer, password, salt }: Params
-) {
+export function encrypt(event: any, { plainBuffer, password, salt }: Params) {
   return SecretKey.activate({
     password,
-    salt
-  })
-    .encrypt(plainBuffer);
+    salt,
+  }).encrypt(plainBuffer);
 }

@@ -6,13 +6,9 @@ type Params = {
   salt: string;
 };
 
-export function encode(
-  event: any,
-  { plainText, password, salt }: Params
-) {
+export function encode(event: any, { plainText, password, salt }: Params) {
   return SecretKey.activate({
     password,
-    salt
-  })
-    .encode(plainText);
+    salt,
+  }).encode(plainText);
 }
