@@ -1,12 +1,12 @@
 import { SecretKey } from "endecoder";
 
-type Params = {
+interface Params {
   plainText: string;
   password: string;
   salt: string;
-};
+}
 
-export function encode(event: any, { plainText, password, salt }: Params) {
+export function encode(event: any, { plainText, password, salt }: Params): string {
   return SecretKey.activate({
     password,
     salt,

@@ -1,13 +1,13 @@
 import { SecretKey } from "endecoder";
 
-type Params = {
+interface Params {
   plainBuffer: Buffer;
   password: string;
   salt: string;
-};
+}
 
-export function encrypt(event: any, { plainBuffer, password, salt }: Params) {
-  return SecretKey.activate({
+export async function encrypt(event: any, { plainBuffer, password, salt }: Params): Promise<string> {
+  return await SecretKey.activate({
     password,
     salt,
   }).encrypt(plainBuffer);
