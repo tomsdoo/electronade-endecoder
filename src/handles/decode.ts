@@ -6,7 +6,10 @@ interface Params {
   salt: string;
 }
 
-export function decode(event: any, { encodedText, password, salt }: Params): string {
+export function decode(
+  event: any,
+  { encodedText, password, salt }: Params
+): string {
   return SecretKey.activate({
     password,
     salt,

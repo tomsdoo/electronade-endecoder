@@ -6,7 +6,10 @@ interface Params {
   salt: string;
 }
 
-export async function decrypt(event: any, { encodedText, password, salt }: Params): Promise<Buffer> {
+export async function decrypt(
+  event: any,
+  { encodedText, password, salt }: Params
+): Promise<Buffer> {
   return await SecretKey.activate({
     password,
     salt,

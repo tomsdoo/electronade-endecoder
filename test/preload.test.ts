@@ -8,7 +8,8 @@ import { mock } from "sinon";
 const ipcRenderer: {
   invoke: (eventName: string, ...args: any[]) => Promise<any>;
 } = {
-  invoke: async (eventName: string, ...args: any[]) => await Promise.resolve(undefined),
+  invoke: async (eventName: string, ...args: any[]) =>
+    await Promise.resolve(undefined),
 };
 
 let mockedValue: string;
