@@ -6,18 +6,18 @@ import { decrypt } from "./decrypt";
 export const handles = [
   {
     eventName: "electronade-endecoder:encode",
-    handler: encode
+    handler: encode,
   },
   {
     eventName: "electronade-endecoder:decode",
-    handler: decode
+    handler: decode,
   },
   {
     eventName: "electronade-endecoder:encrypt",
-    handler: encrypt
+    handler: encrypt,
   },
   {
     eventName: "electronade-endecoder:decrypt",
-    handler: decrypt
-  }
+    handler: decrypt,
+  },
 ];
