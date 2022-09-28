@@ -11,10 +11,11 @@ let plainBuffer: Buffer;
 let password: string;
 let salt: string;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ipcRenderer: {
   invoke: (eventName: string, ...args: any[]) => Promise<any>;
 } = {
-  invoke: (eventName: string) => Promise.resolve(eventName),
+  invoke: async (eventName: string) => await Promise.resolve(eventName),
 };
 
 let handleStore: {
@@ -35,6 +36,7 @@ describe("preloadObject to handles", () => {
   });
 
   it("electronade-endecoder:encode", async () => {
+    // eslint-disable-next-line no-eval
     const myEventName = await eval(preloadObject.endecoder.encode.toString())({
       plainText,
       password,
@@ -45,6 +47,7 @@ describe("preloadObject to handles", () => {
   });
 
   it("electronade-endecoder:decode", async () => {
+    // eslint-disable-next-line no-eval
     const myEventName = await eval(preloadObject.endecoder.decode.toString())({
       encodedText,
       password,
@@ -55,6 +58,7 @@ describe("preloadObject to handles", () => {
   });
 
   it("electronade-endecoder:encrypt", async () => {
+    // eslint-disable-next-line no-eval
     const myEventName = await eval(preloadObject.endecoder.encrypt.toString())({
       plainBuffer,
       password,
@@ -65,6 +69,7 @@ describe("preloadObject to handles", () => {
   });
 
   it("electronade-endecoder:decrypt", async () => {
+    // eslint-disable-next-line no-eval
     const myEventName = await eval(preloadObject.endecoder.decrypt.toString())({
       encodedText,
       password,
