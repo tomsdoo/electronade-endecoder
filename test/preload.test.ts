@@ -8,7 +8,7 @@ import { mock } from "sinon";
 const ipcRenderer: {
   invoke: (eventName: string, ...args: any[]) => Promise<any>;
 } = {
-  invoke: (eventName: string, ...args: any[]) => Promise.resolve(undefined),
+  invoke: async (eventName: string, ...args: any[]) => await Promise.resolve(undefined),
 };
 
 let mockedValue: string;
@@ -46,6 +46,7 @@ describe("preloadObject", () => {
 
     assert.equal(
       mockedValue,
+      // eslint-disable-next-line no-eval
       await eval(preloadObject.endecoder.encode.toString())({
         plainText,
         password,
@@ -70,6 +71,7 @@ describe("preloadObject", () => {
 
     assert.equal(
       mockedValue,
+      // eslint-disable-next-line no-eval
       await eval(preloadObject.endecoder.decode.toString())({
         encodedText,
         password,
@@ -97,6 +99,7 @@ describe("preloadObject", () => {
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
+      // eslint-disable-next-line no-eval
       await eval(preloadObject.endecoder.encrypt.toString())({
         plainBuffer,
         password,
@@ -127,6 +130,7 @@ describe("preloadObject", () => {
       .returns(Promise.resolve(mockedValue2));
 
     assert.equal(
+      // eslint-disable-next-line no-eval
       await eval(preloadObject.endecoder.decrypt.toString())({
         encodedText,
         password,
