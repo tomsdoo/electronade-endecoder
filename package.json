@@ -1,7 +1,7 @@
 {
   "name": "electronade-endecoder",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "It's a package for electronade that provides some feature about encryption.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -34,7 +34,7 @@
     "type": "git",
     "url": "git+https://github.com/tomsdoo/electronade-endecoder.git"
   },
-  "keywords": [],
+  "keywords": [ "electronade" ],
   "author": "tom",
   "license": "MIT",
   "bugs": {
