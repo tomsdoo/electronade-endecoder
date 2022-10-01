@@ -1,6 +1,14 @@
 # electronade-endecoder
 
 It's a package for electronade that provides some feature about encryption.
+See [electronade-endecoder.netlify.app](https://electronade-endecoder.netlify.app/) for details.
+
+![npm](https://img.shields.io/npm/v/electronade-endecoder)
+![NPM](https://img.shields.io/npm/l/electronade-endecoder)
+![npms.io (quality)](https://img.shields.io/npms-io/quality-score/electronade-endecoder)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/electronade-endecoder)
+![Maintenance](https://img.shields.io/maintenance/yes/2022)
+
 
 # Installation
 ``` shell
